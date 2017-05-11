@@ -1,4 +1,4 @@
-package com.github.kyt.entity;
+package com.github.kyt.pojo.dto;
 
 import javax.persistence.*;
 

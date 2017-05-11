@@ -1,6 +1,6 @@
 package com.github.kyt.mapper;
 
-import com.github.kyt.entity.User;
+import com.github.kyt.pojo.dto.User;
 import com.github.kyt.common.mybatis.base.mapper.BaseMapper;
 
 /**

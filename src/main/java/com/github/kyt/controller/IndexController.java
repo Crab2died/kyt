@@ -1,6 +1,6 @@
 package com.github.kyt.controller;
 
-import com.github.kyt.entity.User;
+import com.github.kyt.pojo.dto.User;
 import com.github.kyt.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
