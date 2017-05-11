@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${mq.broker.url}" />
+	</bean>
+
+	<!-- 链接对象进行池化，提高效率，类似于jdbc中的 c3p0/druid等连接池 -->
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory" ref="targetConnectionFactory" />
+		<property name="maxConnections" value="${mq.max.connection}" />
+	</bean>
+
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory" />
+	</bean>
+
+	<!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+		<property name="connectionFactory" ref="connectionFactory" />
+		<!-- 向jmsTemplate注入消息转换器，会自动帮我们转换为我们需要的对象 -->
+		<property name="messageConverter" ref="objConverter" />
+	</bean>
+
+	<!--这个是队列目的地，点对点的 -->
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue"> 
+		<constructor-arg value="${mq.queue.destination}"/>
+	</bean>
+	<!--这个是主题目的地，一对多的 -->
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="topic" />
+	</bean>
+	<!-- 默认的消息回复队列 -->
+	<bean id="defaultResponseTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="defaultResponseTopic"/>
+	</bean>
+
+	<!-- 类型转换器 -->
+	<!-- producer: object-> Message ; consumer: Message -> object -->
+	<bean id="objConverter" class="com.github.kyt.mq.ObjectConverter" />
+
+	<!-- 消息监听适配器 -->
+	<bean id="defaultResponseTopicListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate">
+			<bean class="com.github.kyt.mq.consumer.ConsumerListener" />
+		</property>
+		<!-- 在监听到该topic有消息时，便调用ConsumerListener内的receiveMessage -->
+		<property name="defaultListenerMethod" value="receiveMessage" />
+	</bean>
+
+	<!-- 消息监听器 -->  
+	<bean id="consumerMessageListener" class="com.github.kyt.mq.consumer.ConsumerListener"/> 
+	
+	<!-- 消息监听适配器对应的监听容器 -->
+	<bean id="defaultResponseTopicListenerAdapterContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="queueDestination" />
+		<property name="messageListener" ref="consumerMessageListener" />
+		<!-- 设置固定的线程数 -->  
+	    <property name="concurrentConsumers" value="2"/>
+	    <!-- 设置动态的线程数 -->  
+	    <property name="concurrency" value="2-4"/>
+	    <!-- 设置最大的线程数 -->  
+	    <property name="maxConcurrentConsumers" value="4"/>
+	</bean>
+
+</beans>

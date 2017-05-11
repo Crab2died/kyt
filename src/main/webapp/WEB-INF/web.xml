@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+	<display-name>Archetype Created Web Application</display-name>
+	<listener>
+		<description>Spring监听器</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- ContextLoaderListener初始化Spring上下文时需要使用到的contextConfigLocation参数 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- 配置spring.xml和spring-mybatis.xml这两个配置文件的位置，固定写法 -->
+		<param-value>classpath:config/spring*.xml</param-value>
+	</context-param>
+
+	<!-- LOG4J 配置相关 -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>kyt.root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>600000</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<!-- 配置springmvc的前端控制器 -->
+	<servlet>
+		<servlet-name>mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 默认情况下：DispatcherServlet会寻找WEB-INF下，命名规范为[servlet-name]-servlet.xml文件。如：在上例中，它就会找/WEB-INF/spring-servlet.xml 
+			如果需要修改，需要在web.xml中的<servlet>标记中增加 <init-param>。。。 </init-param>： -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:config/spring.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
