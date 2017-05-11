@@ -28,25 +28,9 @@ public class App {
 	 */
 	private String contextpath = "/";
 
-	protected String charset = "UTF-8";
-	
 	private final static String WBE_XML = "/WEB-INF/web.xml";
 
 	public App() {
-	}
-
-	public App(int port, String webapp, String contextpath) {
-		this.port = port;
-		this.webapp = webapp;
-		this.contextpath = contextpath;
-	}
-
-	public App(int port, String webapp, String contextpath, String charset) {
-		super();
-		this.port = port;
-		this.webapp = webapp;
-		this.contextpath = contextpath;
-		this.charset = charset;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.github.kyt.mq.producer.impl;
+package com.github.kyt.common.mq.producer.impl;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
-import com.github.kyt.mq.producer.ProducerService;
+import com.github.kyt.common.mq.producer.ProducerService;
 
 @Component("ProducerService")
 public class ProducerServiceImpl implements ProducerService{

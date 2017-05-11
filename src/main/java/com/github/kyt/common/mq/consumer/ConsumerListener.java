@@ -1,4 +1,4 @@
-package com.github.kyt.mq.consumer;
+package com.github.kyt.common.mq.consumer;
 
 import javax.jms.JMSException;
 import javax.jms.Message;

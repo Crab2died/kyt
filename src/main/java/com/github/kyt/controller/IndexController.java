@@ -27,7 +27,12 @@ public class IndexController {
 		logger.debug("welcome to index!");
 		//indexservice.Index();
 		User user = userService.getById(1);
+		User nuser = new User();
+		nuser.setUname("test");
+		nuser.setUpass("111");
+		userService.insert(nuser);
 		System.out.println(user.getUname());
+		System.out.println(nuser.getId());
 		return "index";
 	}
 }

@@ -1,4 +1,4 @@
-package com.github.kyt.mq;
+package com.github.kyt.common.mq;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -6,7 +6,7 @@ import org.apache.activemq.jms.pool.PooledConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 
-import com.github.kyt.mq.consumer.ConsumerListener;
+import com.github.kyt.common.mq.consumer.ConsumerListener;
 
 public class MQListener {
 

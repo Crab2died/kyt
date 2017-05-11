@@ -1,4 +1,4 @@
-package com.github.kyt.mq;
+package com.github.kyt.common.mq;
 
 import java.io.Serializable;
 

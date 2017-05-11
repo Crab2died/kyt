@@ -1,4 +1,4 @@
-package com.github.kyt.mq.producer;
+package com.github.kyt.common.mq.producer;
 
 import javax.jms.Destination;
 

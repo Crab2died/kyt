@@ -72,7 +72,7 @@
     <!-- ========================================分隔线========================================= -->
     <!-- 通用Mapper配置 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.github.kyt.dao" />
+		<property name="basePackage" value="com.github.kyt.mapper" />
 		<property name="markerInterface" value="com.github.kyt.mybatis.base.mapper.BaseMapper" />
 	</bean>
 
