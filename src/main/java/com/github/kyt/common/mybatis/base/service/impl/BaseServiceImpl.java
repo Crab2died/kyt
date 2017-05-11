@@ -1,6 +1,6 @@
-package com.github.kyt.mybatis.base.service.impl;
+package com.github.kyt.common.mybatis.base.service.impl;
 
-import com.github.kyt.mybatis.base.service.BaseService;
+import com.github.kyt.common.mybatis.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.BaseMapper;
 

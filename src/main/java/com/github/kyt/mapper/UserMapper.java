@@ -1,7 +1,7 @@
 package com.github.kyt.mapper;
 
 import com.github.kyt.entity.User;
-import com.github.kyt.mybatis.base.mapper.BaseMapper;
+import com.github.kyt.common.mybatis.base.mapper.BaseMapper;
 
 /**
  * @author : wbhe2</br>

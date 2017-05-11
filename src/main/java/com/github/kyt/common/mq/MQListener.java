@@ -10,10 +10,8 @@ import com.github.kyt.common.mq.consumer.ConsumerListener;
 
 public class MQListener {
 
-	public static JmsTemplate jmsTemplate;
-	
 	static {
-		jmsTemplate = new JmsTemplate();
+		JmsTemplate jmsTemplate = new JmsTemplate();
 		ActiveMQConnectionFactory conn = new ActiveMQConnectionFactory();
 		conn.setBrokerURL("failover:(tcp://127.0.0.1:61616)");
 		PooledConnectionFactory pool = new PooledConnectionFactory();

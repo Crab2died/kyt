@@ -1,7 +1,7 @@
 package com.github.kyt.service.impl;
 
 import com.github.kyt.entity.User;
-import com.github.kyt.mybatis.base.service.impl.BaseServiceImpl;
+import com.github.kyt.common.mybatis.base.service.impl.BaseServiceImpl;
 import com.github.kyt.service.UserService;
 import org.springframework.stereotype.Service;
 

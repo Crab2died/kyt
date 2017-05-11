@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 HTTP_PORT=10086
 JMX_PORT=9998
 ADDRESS=

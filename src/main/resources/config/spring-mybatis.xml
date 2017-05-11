@@ -73,7 +73,7 @@
     <!-- 通用Mapper配置 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.github.kyt.mapper" />
-		<property name="markerInterface" value="com.github.kyt.mybatis.base.mapper.BaseMapper" />
+		<property name="markerInterface" value="com.github.kyt.common.mybatis.base.mapper.BaseMapper" />
 	</bean>
 
 	<!-- ========================================分隔线========================================= -->
@@ -114,16 +114,16 @@
 
 	<aop:config>
 		<aop:pointcut id="transactionPointcut"
-			expression="execution(* com.github.kyt.**.service.impl.*.*(..))" />
+			expression="execution(* com.github.kyt.*.service.impl.*.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
 
 	<!-- 配置druid监控spring jdbc -->
-	<bean id="druid-stat-interceptor"
+	<bean id="druidStatInterceptor"
 		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+	<bean id="druidStatPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
 		scope="prototype">
 		<property name="patterns">
 			<list>
@@ -132,8 +132,7 @@
 		</property>
 	</bean>
 	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor"
-			pointcut-ref="druid-stat-pointcut" />
+		<aop:advisor advice-ref="druidStatInterceptor" pointcut-ref="druidStatPointcut" />
 	</aop:config>
 	<!-- 配置视图解析器 -->
 	<!-- prefix和suffix：查找视图页面的前缀和后缀（前缀[逻辑视图名]后缀）， 比如传进来的逻辑视图名为WEB-INF/jsp/hello，则该该jsp视图页面应该存放在“WEB-INF/jsp/hello.jsp”； -->

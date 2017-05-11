@@ -1,4 +1,4 @@
-package com.github.kyt.mybatis.base.mapper;
+package com.github.kyt.common.mybatis.base.mapper;
 
 
 import tk.mybatis.mapper.common.ConditionMapper;

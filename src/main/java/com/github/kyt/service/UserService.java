@@ -1,7 +1,7 @@
 package com.github.kyt.service;
 
 import com.github.kyt.entity.User;
-import com.github.kyt.mybatis.base.service.BaseService;
+import com.github.kyt.common.mybatis.base.service.BaseService;
 
 /**
  * @author : wbhe2</br>
